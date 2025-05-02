@@ -1,21 +1,17 @@
 package org.example;
 import io.reactivex.rxjava3.core.*;
 import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
+import org.example.msg.MessageService;
 import org.junit.jupiter.api.Assertions;
+
+import java.util.concurrent.atomic.AtomicReference;
 
 public class Main {
 
-    static String result = "";
+
     public static void main(String[] args) {
-        String[] letters = {"a", "b", "c", "d", "e", "f", "g"};
-        Observable<String> observable = Observable.fromArray(letters);
-        observable.subscribe(
-                i -> result += i,  //OnNext
-                Throwable::printStackTrace, //OnError
-                () -> result += "_Completed" //OnCompleted
-        ).dispose();
-        Assertions.assertEquals(result, "abcdefg_Completed");
-
-
     }
+
+
 }
