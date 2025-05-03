@@ -20,7 +20,7 @@ public class ObserverTest {
         Observable<String> observable = Observable.fromArray(letters);
         observable.subscribe(
                 item -> result1 += item,  //OnNext wird für jedes objekt im Datenstrom (Oberserveable) ausgeführt
-                Throwable::printStackTrace, //OnError wird ausgeführt fa
+                Throwable::printStackTrace, //OnError
                 () -> result1 += "_Completed"  //OnCompleted
         ).dispose();
         Assertions.assertEquals(result1, "abcdefg_Completed");
@@ -31,7 +31,7 @@ public class ObserverTest {
         AtomicReference<String> result2 = new AtomicReference<>("");
         observable.subscribe(
                 item -> result2.updateAndGet(r -> r + item),  //OnNext wird für jedes objekt im Datenstrom (Oberserveable) ausgeführt
-                Throwable::printStackTrace, //OnError wird ausgeführt fa
+                Throwable::printStackTrace, //OnError
                 () -> result2.updateAndGet(r -> r + "_Completed")  //OnCompleted
         ).dispose();
         Assertions.assertEquals(result2.get(), "abcdefg_Completed");

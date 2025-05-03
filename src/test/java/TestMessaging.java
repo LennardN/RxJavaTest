@@ -5,6 +5,11 @@ public class TestMessaging {
 
     @Test
     public void test(){
+        /*
+        Das Repository liefert Daten
+        Der Service kapselt die Quelle
+        Der Controller benutzt die Daten
+        */
         MessageRepository repo = new MessageRepository();
         MessageService service = new MessageService(repo);
         ChatController vm = new ChatController(service);
@@ -12,10 +17,18 @@ public class TestMessaging {
         vm.startListening();
 
         repo.simulateIncomingMessage(new Message("Alice", "Hallo!"));
-        repo.simulateIncomingMessage(new Message("Bob", "Hey Alice!"));
+        repo.simulateIncomingMessage(new Message("Bob", "Moin!"));
+        repo.simulateError(new Throwable("Error1234"));
 
         try { Thread.sleep(1000); } catch (InterruptedException ignored) {}
 
         vm.stopListening();
+
+        /*
+        Vorteile:
+        - Threadsafe
+        - Asynchron => nicht blockierend
+        - Parallelisiert automatisch
+         */
     }
 }
